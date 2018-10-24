@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .wrapper{
+
+    }
+
+    .dropzone{
+        width: 500px;
+        height: 300px;
+        background-color: deeppink;
+    }
+
+    .result img{
+        width: 100px;
+    }
+
+</style>
+
+<div class="wrapper">
+
+    <img src="aaa.jpg" style="height: 100px">
+
+    <div class="dropzone">
+
+    </div>
+
+    <div class="result">
+        <canvas id="myCanvas"></canvas>
+
+    </div>
+</div>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+
+
+        $(".dropzone").on("dragenter dragover",function (event) {
+            event.preventDefault();
+
+        });
+
+        $(".dropzone").on("drop",function (event) {
+            event.preventDefault();
+
+            var files = event.originalEvent.dataTransfer.files;
+
+            // console.log(files);
+
+            for(var i = 0 ; i < files.length ; i++){
+
+                var reader  = new FileReader();
+
+                reader.readAsDataURL(files[i]);
+
+                reader.onload = function (e) {
+
+                    var dataURL = e.target.result;
+
+                    var img = document.createElement("img");
+
+                    img.setAttribute("src",dataURL);
+
+                    $(".result").append(img);
+
+                    // loadCanvas(e.target.result);
+                }
+            }
+
+
+
+        });
+
+    });
+
+</script>
+
+
+
+</body>
+</html>
